@@ -1,0 +1,26 @@
+{
+  "name": "rtcstats-extension",
+  "version": "0.1.1",
+  "description": "Chrome extension that streams the WebRTC traces and getStats() of the sites you enable to your own rtcstats server.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.12"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.mjs && node scripts/copy-static.mjs",
+    "test": "node --test test/unit/",
+    "test:e2e": "npm run build && node --test test/e2e/",
+    "zip": "npm run build && node scripts/zip.mjs"
+  },
+  "dependencies": {
+    "@rtcstats/rtcstats-js": "2.5.0"
+  },
+  "devDependencies": {
+    "playwright": "1.49.1",
+    "webpack": "5.99.9",
+    "webpack-cli": "6.0.1",
+    "ws": "8.18.0"
+  }
+}
