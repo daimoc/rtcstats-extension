@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>rtcstats settings</title>
+    <link rel="stylesheet" href="ui.css">
+    <style>
+        main {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        #sites {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #sites li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--line);
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>rtcstats WebRTC monitor</h1>
+    <p class="muted">
+        On the sites you enable, the extension records the WebRTC API calls and
+        <code>getStats()</code> results and streams them to your rtcstats server.
+        Nothing is sent anywhere else.
+    </p>
+
+    <h2>Server</h2>
+    <form id="server-form">
+        <label for="serverUrl">rtcstats server URL</label>
+        <input id="serverUrl" type="url" placeholder="wss://rtcstats.example.org/" required>
+        <p class="hint">Starts with ws:// or wss://.</p>
+
+        <label for="token">Token (optional)</label>
+        <input id="token" type="password" autocomplete="off">
+        <p class="hint">
+            Sent as <code>rtcstats-token</code> when the server requires authorization.
+            Stored in this browser only, never shown to the sites you trace.
+        </p>
+
+        <label for="label">Label (optional)</label>
+        <input id="label" type="text" placeholder="e.g. support-desk-3">
+        <p class="hint">Added to every dump, to find your traces on the server.</p>
+
+        <div class="row">
+            <button class="primary" type="submit">Save</button>
+            <button id="test" type="button">Save and test the connection</button>
+            <span id="server-status" role="status"></span>
+        </div>
+    </form>
+
+    <h2>Traced sites</h2>
+    <p class="muted">
+        Add the site of your meeting platform. A platform that runs the call in
+        an embedded frame from another site needs that site too.
+    </p>
+    <ul id="sites"></ul>
+    <p id="no-sites" class="muted">No site yet.</p>
+    <form id="site-form" class="row">
+        <input id="site" type="text" placeholder="https://meet.example.org" style="flex: 1; min-width: 200px">
+        <button type="submit">Add</button>
+    </form>
+    <p id="site-status" class="hint" role="status"></p>
+</main>
+<script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>rtcstats</title>
+    <link rel="stylesheet" href="ui.css">
+    <style>
+        body {
+            width: 320px;
+            padding: 16px;
+        }
+
+        #site {
+            font-weight: 600;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <h1>rtcstats WebRTC monitor</h1>
+
+    <p id="no-server" class="warn" hidden>
+        No rtcstats server set yet. <a href="#" id="open-options-1">Open the settings</a>.
+    </p>
+
+    <div id="unsupported" hidden>
+        <p class="muted">This page can't be traced: only http and https sites can.</p>
+    </div>
+
+    <div id="supported" hidden>
+        <p>Site: <span id="site"></span></p>
+        <p id="state" class="muted"></p>
+        <div class="row">
+            <button id="toggle" class="primary"></button>
+            <button id="reload" hidden>Reload the page</button>
+        </div>
+        <p id="reload-hint" class="hint" hidden>
+            Tracing starts when the page loads: reload it before you join the meeting.
+        </p>
+    </div>
+
+    <p class="hint"><a href="#" id="open-options-2">Settings</a></p>
+
+    <script src="popup.js"></script>
+</body>
+</html>

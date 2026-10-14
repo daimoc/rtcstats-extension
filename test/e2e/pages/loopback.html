@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>loopback</title></head>
+<body>
+<script>
+// Two peer connections in one page, with a fake microphone, so the
+// extension has a real call to trace.
+window.callState = 'starting';
+(async () => {
+    const a = new RTCPeerConnection();
+    const b = new RTCPeerConnection();
+    a.onicecandidate = (e) => e.candidate && b.addIceCandidate(e.candidate);
+    b.onicecandidate = (e) => e.candidate && a.addIceCandidate(e.candidate);
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    stream.getTracks().forEach((t) => a.addTrack(t, stream));
+    a.createDataChannel('chat');
+    await a.setLocalDescription(await a.createOffer());
+    await b.setRemoteDescription(a.localDescription);
+    await b.setLocalDescription(await b.createAnswer());
+    await a.setRemoteDescription(b.localDescription);
+    a.onconnectionstatechange = () => { window.callState = a.connectionState; };
+    window.pcs = [a, b];
+})().catch((e) => { window.callState = 'error: ' + e; });
+</script>
+</body>
+</html>

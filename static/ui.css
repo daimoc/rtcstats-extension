@@ -1,0 +1,124 @@
+:root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1d2330;
+    --muted: #5d6677;
+    --line: #d9dde5;
+    --accent: #1f6feb;
+    --accent-fg: #ffffff;
+    --ok: #1a7f37;
+    --warn: #9a6700;
+    --err: #cf222e;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #1b1f27;
+        --fg: #e6e9ef;
+        --muted: #9aa3b2;
+        --line: #343b48;
+        --accent: #4c8dff;
+        --accent-fg: #0b0e13;
+        --ok: #3fb950;
+        --warn: #d29922;
+        --err: #f85149;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 14px/1.45 system-ui, sans-serif;
+}
+
+h1 {
+    font-size: 16px;
+    margin: 0 0 12px;
+}
+
+h2 {
+    font-size: 14px;
+    margin: 24px 0 8px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.ok {
+    color: var(--ok);
+}
+
+.warn {
+    color: var(--warn);
+}
+
+.err {
+    color: var(--err);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin: 12px 0 4px;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="password"] {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}
+
+button {
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-fg);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+[hidden] {
+    display: none !important;
+}
